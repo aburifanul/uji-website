@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jasa Deploy & Bikin Website — Harga Mahasiswa</title>
+<meta name="description" content="Jasa deploy Laravel dan pembuatan website dengan harga ramah kantong mahasiswa. Subdomain gratis, SSL, dan support via WhatsApp.">
+<style>
+:root {
+  --bg: #eef2f7;
+  --surface: #ffffff;
+  --ink: #0f1b3d;
+  --muted: #55627f;
+  --line: #d3dbe8;
+  --hl: #ffc933;
+  --hl-ink: #0f1b3d;
+  --term-bg: #0f1b3d;
+  --term-ink: #dfe7f7;
+  --term-ok: #7be0a4;
+  --term-dim: #8e9bbd;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1226;
+    --surface: #131d38;
+    --ink: #eaf0ff;
+    --muted: #9aa8c9;
+    --line: #25335a;
+    --hl: #ffc933;
+    --hl-ink: #0f1b3d;
+    --term-bg: #060b19;
+    --term-ink: #dfe7f7;
+    --term-ok: #7be0a4;
+    --term-dim: #7684a8;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+:focus-visible { outline: 3px solid var(--hl); outline-offset: 3px; border-radius: 4px; }
+
+/* Header */
+header.top { padding: 1.25rem 0; }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { font-weight: 800; letter-spacing: -.01em; text-decoration: none; font-size: 1.1rem; }
+.brand span { background: var(--hl); color: var(--hl-ink); padding: 0 .35em; border-radius: 4px; }
+nav a { text-decoration: none; margin-left: 1.25rem; font-size: .95rem; color: var(--muted); }
+nav a:hover { color: var(--ink); }
+@media (max-width: 640px) { nav a:not(.nav-cta) { display: none; } }
+
+/* Buttons */
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 700;
+  padding: .8rem 1.4rem; border-radius: 10px; border: 2px solid var(--ink);
+  background: var(--hl); color: var(--hl-ink); transition: transform .12s ease, box-shadow .12s ease;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.btn.ghost { background: transparent; color: var(--ink); }
+@media (prefers-color-scheme: dark) {
+  .btn { border-color: var(--hl); box-shadow: 3px 3px 0 var(--hl); }
+  .btn:hover { box-shadow: 5px 5px 0 var(--hl); }
+  .btn:active { box-shadow: 1px 1px 0 var(--hl); }
+  .btn.ghost { color: var(--ink); border-color: var(--line); box-shadow: none; }
+}
+
+/* Hero */
+.hero { padding: 3rem 0 4rem; }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; gap: 2rem; } }
+h1 { font-size: clamp(2.2rem, 5.2vw, 3.7rem); line-height: 1.05; letter-spacing: -.03em; margin: 0 0 1.1rem; font-weight: 850; }
+h1 mark { background: linear-gradient(transparent 58%, var(--hl) 58%); color: inherit; padding: 0 .1em; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 34em; margin: 0 0 1.75rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: .9rem; }
+.hero-note { margin-top: 1.1rem; font-size: .9rem; color: var(--muted); }
+
+/* Terminal */
+.term {
+  background: var(--term-bg); color: var(--term-ink);
+  border-radius: 14px; padding: 1rem 1.15rem 1.2rem;
+  font-family: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  font-size: .86rem; line-height: 1.75; min-height: 20.5rem; overflow: hidden;
+  border: 1px solid var(--line);
+}
+.term-bar { display: flex; gap: .4rem; margin-bottom: .8rem; }
+.term-bar i { width: .7rem; height: .7rem; border-radius: 50%; background: var(--term-dim); opacity: .5; display: block; }
+.term .ln { white-space: pre-wrap; word-break: break-word; }
+.term .dim { color: var(--term-dim); }
+.term .ok { color: var(--term-ok); }
+.term .hl { color: var(--hl); }
+.cursor { display: inline-block; width: .55em; height: 1em; background: var(--term-ink); vertical-align: -.15em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Sections */
+section { padding: 4rem 0; }
+section.alt { background: var(--surface); border-block: 1px solid var(--line); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -.02em; line-height: 1.15; margin: 0 0 .6rem; font-weight: 800; }
+.sub { color: var(--muted); max-width: 38em; margin: 0 0 2.2rem; }
+
+/* Layanan */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.panel { border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem; background: var(--bg); }
+section.alt .panel { background: var(--bg); }
+.panel h3 { margin: 0 0 .4rem; font-size: 1.25rem; }
+.panel p { margin: 0 0 1rem; color: var(--muted); }
+.panel ul { margin: 0; padding-left: 1.1rem; }
+.panel li { margin-bottom: .3rem; }
+
+/* Harga */
+.price-block + .price-block { margin-top: 3.2rem; }
+.price-block h3 { font-size: 1.3rem; margin: 0 0 1.2rem; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; }
+@media (max-width: 860px) { .plans { grid-template-columns: 1fr; } }
+.plan {
+  border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+  padding: 1.6rem; display: flex; flex-direction: column; position: relative;
+}
+.plan.pick { border: 2px solid var(--ink); }
+@media (prefers-color-scheme: dark) { .plan.pick { border-color: var(--hl); } }
+.plan .tag {
+  position: absolute; top: -.8rem; left: 1.4rem; background: var(--hl); color: var(--hl-ink);
+  font-size: .78rem; font-weight: 800; padding: .15rem .65rem; border-radius: 99px;
+}
+.plan h4 { margin: 0; font-size: 1.1rem; }
+.plan .desc { margin: .2rem 0 1rem; color: var(--muted); font-size: .92rem; }
+.plan .price { font-size: 2.1rem; font-weight: 850; letter-spacing: -.03em; line-height: 1.1; }
+.plan .price small { font-size: .85rem; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+.plan ul { list-style: none; padding: 0; margin: 1.1rem 0 1.5rem; flex: 1; }
+.plan li { padding-left: 1.5rem; position: relative; margin-bottom: .45rem; font-size: .96rem; }
+.plan li::before {
+  content: ""; position: absolute; left: 0; top: .5em; width: .85rem; height: .45rem;
+  border-left: 3px solid var(--term-ok); border-bottom: 3px solid var(--term-ok); transform: rotate(-45deg) translateY(-30%);
+}
+.plan .btn { text-align: center; }
+
+.block-sub { margin: -.7rem 0 1.2rem; color: var(--muted); font-size: .95rem; max-width: 42em; }
+.plan .was { color: var(--muted); text-decoration: line-through; font-size: .95rem; }
+.plan .save { align-self: flex-start; margin-top: .5rem; background: var(--term-ok); color: #0b2a18; font-size: .8rem; font-weight: 800; padding: .1rem .6rem; border-radius: 99px; }
+.addons { margin-top: 1.4rem; border: 1px dashed var(--line); border-radius: 12px; padding: 1rem 1.3rem; font-size: .95rem; color: var(--muted); }
+.addons b { color: var(--ink); }
+
+/* Alur */
+.steps { counter-reset: s; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; list-style: none; padding: 0; margin: 0; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+.steps li { counter-increment: s; border-top: 3px solid var(--ink); padding-top: .9rem; }
+@media (prefers-color-scheme: dark) { .steps li { border-color: var(--hl); } }
+.steps li::before { content: counter(s); display: inline-block; font-weight: 850; font-size: 1.6rem; margin-bottom: .1rem; }
+.steps b { display: block; margin-bottom: .2rem; }
+.steps span { color: var(--muted); font-size: .94rem; }
+
+/* FAQ */
+details { border-bottom: 1px solid var(--line); padding: 1rem 0; }
+summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.4rem; line-height: 1; transition: transform .2s ease; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin: .7rem 0 0; color: var(--muted); max-width: 46em; }
+
+/* CTA + footer */
+.cta { text-align: center; }
+.cta .box { background: var(--term-bg); color: var(--term-ink); border-radius: 18px; padding: 3rem 1.5rem; }
+.cta h2 { color: var(--term-ink); }
+.cta p { color: var(--term-dim); margin: 0 auto 1.6rem; max-width: 32em; }
+.cta .btn { border-color: var(--hl); box-shadow: 3px 3px 0 var(--hl); }
+.cta .btn:hover { box-shadow: 5px 5px 0 var(--hl); }
+footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .9rem; text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cursor { animation: none; }
+  .btn, summary::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">codeq<span>.web.id</span></a>
+    <nav>
+      <a href="#layanan">Layanan</a>
+      <a href="#harga">Harga</a>
+      <a href="#alur">Alur</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta btn" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20deploy%2Fbikin%20website" style="padding:.45rem 1rem;box-shadow:none;margin-left:1.25rem;">Chat WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Website kamu <mark>online</mark>, tanpa bikin dompet kosong.</h1>
+        <p class="lead">Jasa deploy Laravel dan pembuatan website untuk tugas kuliah, skripsi, UKM kampus, sampai usaha kecil. Harga mahasiswa, dikerjakan rapi.</p>
+        <div class="hero-cta">
+          <a class="btn" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20deploy%2Fbikin%20website">Konsultasi gratis</a>
+          <a class="btn ghost" href="#harga">Lihat harga</a>
+        </div>
+        <p class="hero-note">Subdomain <b>codeq.web.id</b> gratis di semua paket deploy.</p>
+      </div>
+
+      <div class="term" role="img" aria-label="Simulasi proses deploy aplikasi Laravel yang berhasil">
+        <div class="term-bar"><i></i><i></i><i></i></div>
+        <div id="log"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYANAN -->
+  <section class="alt" id="layanan">
+    <div class="wrap">
+      <h2>Dua layanan, satu tujuan: web kamu jalan.</h2>
+      <p class="sub">Sudah punya project tapi bingung naik ke server? Atau belum punya sama sekali? Pilih yang sesuai.</p>
+      <div class="two">
+        <div class="panel">
+          <h3>Jasa deploy &amp; hosting</h3>
+          <p>Project Laravel kamu sudah jadi, tinggal dipasang di server supaya bisa dibuka siapa saja.</p>
+          <ul>
+            <li>Setup server, database, dan file <code>.env</code></li>
+            <li>Domain atau subdomain terpasang, HTTPS aktif</li>
+            <li>Siap untuk demo sidang atau dipakai pelanggan</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Bikin website dari nol</h3>
+          <p>Ceritakan kebutuhanmu, kami buatkan dari desain sampai online. Cocok untuk usaha, organisasi, atau tugas.</p>
+          <ul>
+            <li>Landing page, company profile, sampai toko online</li>
+            <li>Tampilan responsif, nyaman di HP</li>
+            <li>Lebih hemat kalau diambil paket bundling dengan hosting</li>
+          </ul>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:1.4rem;margin-bottom:0;">Saat ini deploy untuk <b>Laravel</b>. CodeIgniter, PHP Native, WordPress, dan Node.js menyusul.</p>
+    </div>
+  </section>
+
+  <!-- HARGA -->
+  <section id="harga">
+    <div class="wrap">
+      <h2>Harga jujur, bisa nego sesuai budget.</h2>
+      <p class="sub">Pilih yang kamu butuhkan: hosting saja, bikin website saja, atau paket bundling yang lebih hemat. Paket hosting bersifat kumulatif: Standard sudah termasuk isi Basic, Premium sudah termasuk isi Standard.</p>
+
+      <!-- 1. HOSTING -->
+      <div class="price-block" id="hosting">
+        <h3>1. Jasa deploy &amp; hosting</h3>
+        <p class="block-sub">Untuk kamu yang sudah punya project Laravel dan tinggal butuh dipasang online.</p>
+        <div class="plans">
+          <div class="plan">
+            <h4>Basic</h4>
+            <p class="desc">Untuk tugas dan demo</p>
+            <div class="price">Rp150.000</div>
+            <ul>
+              <li>Deploy project Laravel</li>
+              <li>Subdomain codeq.web.id gratis</li>
+              <li>Setup database &amp; .env</li>
+            </ul>
+            <a class="btn ghost" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20paket%20Hosting%20Basic">Pilih Basic</a>
+          </div>
+          <div class="plan pick">
+            <span class="tag">Paling dipilih</span>
+            <h4>Standard</h4>
+            <p class="desc">Untuk skripsi dan UKM</p>
+            <div class="price">Rp350.000</div>
+            <ul>
+              <li>Semua isi Basic</li>
+              <li>HTTPS (SSL) aktif</li>
+              <li>Optimasi performa dasar</li>
+              <li>Revisi konfigurasi setelah online</li>
+            </ul>
+            <a class="btn" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20paket%20Hosting%20Standard">Pilih Standard</a>
+          </div>
+          <div class="plan">
+            <h4>Premium</h4>
+            <p class="desc">Untuk bisnis yang jalan terus</p>
+            <div class="price">Rp500.000</div>
+            <ul>
+              <li>Semua isi Standard</li>
+              <li>Backup berkala</li>
+              <li>Pendampingan setelah deploy</li>
+              <li>Prioritas respon via WhatsApp</li>
+            </ul>
+            <a class="btn ghost" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20paket%20Hosting%20Premium">Pilih Premium</a>
+          </div>
+        </div>
+        <div class="addons">
+          <b>Tambahan:</b> subdomain khusus (misal <i>namamu.codeq.web.id</i>) +Rp25.000 &nbsp;|&nbsp; pakai domain sendiri, biaya konfigurasi mulai Rp50.000 (harga domain dibayar terpisah ke registrar).
+        </div>
+      </div>
+
+      <!-- 2. PEMBUATAN WEB -->
+      <div class="price-block" id="pembuatan">
+        <h3>2. Pembuatan website</h3>
+        <p class="block-sub">Khusus jasa pembuatan. Hosting tidak termasuk, bisa ditambah dari paket di atas atau ambil paket bundling di bawah.</p>
+        <div class="plans">
+          <div class="plan">
+            <h4>Landing Page</h4>
+            <p class="desc">Satu halaman, langsung to the point</p>
+            <div class="price"><small>mulai</small> Rp300.000</div>
+            <ul>
+              <li>1 halaman responsif</li>
+              <li>Tombol WhatsApp &amp; form kontak</li>
+              <li>1x revisi desain</li>
+            </ul>
+            <a class="btn ghost" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20pembuatan%20Landing%20Page">Pesan sekarang</a>
+          </div>
+          <div class="plan pick">
+            <span class="tag">Paling dipilih</span>
+            <h4>Company Profile</h4>
+            <p class="desc">Untuk usaha, organisasi, komunitas</p>
+            <div class="price"><small>mulai</small> Rp750.000</div>
+            <ul>
+              <li>Hingga 5 halaman</li>
+              <li>Panel admin untuk edit konten</li>
+              <li>Tampilan responsif</li>
+              <li>2x revisi desain</li>
+            </ul>
+            <a class="btn" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20pembuatan%20Company%20Profile">Pesan sekarang</a>
+          </div>
+          <div class="plan">
+            <h4>Aplikasi Laravel</h4>
+            <p class="desc">Toko online, sistem informasi, dll.</p>
+            <div class="price"><small>mulai</small> Rp1.500.000</div>
+            <ul>
+              <li>Fitur sesuai kebutuhan</li>
+              <li>Login, database, panel admin</li>
+              <li>Cocok untuk skripsi &amp; tugas akhir</li>
+            </ul>
+            <a class="btn ghost" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20konsultasi%20pembuatan%20Aplikasi%20Laravel">Konsultasi dulu</a>
+          </div>
+        </div>
+        <div class="addons">
+          Harga akhir tergantung jumlah fitur dan tenggat. Chat dulu, estimasi gratis. Punya budget terbatas? Bilang saja, kami carikan skema yang masuk.
+        </div>
+      </div>
+
+      <!-- 3. BUNDLING -->
+      <div class="price-block" id="bundling">
+        <h3>3. Paket bundling: website + hosting</h3>
+        <p class="block-sub">Pembuatan website sekaligus hosting, lebih hemat dibanding beli terpisah.</p>
+        <div class="plans">
+          <div class="plan">
+            <h4>Bundle Landing Page</h4>
+            <p class="desc">Landing Page + Hosting Basic</p>
+            <div class="was">Rp450.000</div>
+            <div class="price">Rp400.000</div>
+            <span class="save">Hemat Rp50.000</span>
+            <ul>
+              <li>Semua isi Landing Page</li>
+              <li>Semua isi Hosting Basic</li>
+              <li>Langsung online, tinggal pakai</li>
+            </ul>
+            <a class="btn ghost" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20Bundle%20Landing%20Page">Ambil bundle</a>
+          </div>
+          <div class="plan pick">
+            <span class="tag">Paling hemat</span>
+            <h4>Bundle Company Profile</h4>
+            <p class="desc">Company Profile + Hosting Standard</p>
+            <div class="was">Rp1.100.000</div>
+            <div class="price">Rp950.000</div>
+            <span class="save">Hemat Rp150.000</span>
+            <ul>
+              <li>Semua isi Company Profile</li>
+              <li>Semua isi Hosting Standard (HTTPS aktif)</li>
+              <li>Serah terima dan panduan singkat</li>
+            </ul>
+            <a class="btn" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20pesan%20Bundle%20Company%20Profile">Ambil bundle</a>
+          </div>
+          <div class="plan">
+            <h4>Bundle Aplikasi Laravel</h4>
+            <p class="desc">Aplikasi Laravel + Hosting Premium</p>
+            <div class="was">Rp2.000.000</div>
+            <div class="price"><small>mulai</small> Rp1.750.000</div>
+            <span class="save">Hemat Rp250.000</span>
+            <ul>
+              <li>Semua isi Aplikasi Laravel</li>
+              <li>Semua isi Hosting Premium</li>
+              <li>Backup &amp; pendampingan setelah online</li>
+            </ul>
+            <a class="btn ghost" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20konsultasi%20Bundle%20Aplikasi%20Laravel">Konsultasi dulu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALUR -->
+  <section class="alt" id="alur">
+    <div class="wrap">
+      <h2>Cara pesan</h2>
+      <p class="sub">Tidak ribet, semua lewat WhatsApp.</p>
+      <ol class="steps">
+        <li><b>Chat &amp; ceritakan kebutuhan</b><span>Kirim detail project atau ide websitemu.</span></li>
+        <li><b>Terima estimasi</b><span>Harga dan waktu pengerjaan dikonfirmasi di awal.</span></li>
+        <li><b>Bayar DP &amp; pengerjaan</b><span>Progres dikabari, bisa kasih masukan.</span></li>
+        <li><b>Online &amp; serah terima</b><span>Website live, akses diserahkan ke kamu.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2>Pertanyaan yang sering muncul</h2>
+      <p class="sub">Belum ketemu jawabannya? Tanya langsung via WhatsApp.</p>
+      <details>
+        <summary>Bisa deploy untuk project selain Laravel?</summary>
+        <p>Saat ini baru Laravel. CodeIgniter, PHP Native, WordPress, dan Node.js sedang disiapkan. Kalau butuh yang lain, chat saja dulu.</p>
+      </details>
+      <details>
+        <summary>Berapa lama pengerjaannya?</summary>
+        <p>Deploy biasanya selesai dalam 1 hari kerja setelah semua data lengkap. Pembuatan website tergantung kompleksitas, umumnya 3 hari sampai 2 minggu.</p>
+      </details>
+      <details>
+        <summary>Boleh pakai domain sendiri?</summary>
+        <p>Boleh. Biaya konfigurasi mulai Rp50.000, sedangkan harga domain dibayar sendiri ke penyedia domain.</p>
+      </details>
+      <details>
+        <summary>Pembayarannya bagaimana?</summary>
+        <p>Deploy dibayar sebelum pengerjaan. Untuk pembuatan website, bisa DP dulu lalu pelunasan setelah website selesai. Detail dikonfirmasi lewat WhatsApp.</p>
+      </details>
+      <details>
+        <summary>Source code-nya jadi milik saya?</summary>
+        <p>Untuk jasa bikin website, ya. Source code dan akses diserahkan setelah pelunasan.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" style="padding-top:0;">
+    <div class="wrap">
+      <div class="box">
+        <h2>Siap bikin websitemu online?</h2>
+        <p>Konsultasi dan estimasi gratis. Balasan biasanya dalam hitungan jam.</p>
+        <a class="btn" href="https://wa.me/6281214035885?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20deploy%2Fbikin%20website">Chat WhatsApp 0812-1403-5885</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="yr">2026</span> codeq.web.id — Jasa deploy &amp; bikin website</div>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var el = document.getElementById('log');
+  var lines = [
+    ['$ ', 'git pull origin main', ''],
+    ['', 'Already up to date.', 'dim'],
+    ['$ ', 'composer install --no-dev', ''],
+    ['', 'Generating optimized autoload files', 'dim'],
+    ['$ ', 'php artisan migrate --force', ''],
+    ['', 'Migrated: 2025_01_01_create_users_table', 'dim'],
+    ['$ ', 'php artisan config:cache', ''],
+    ['', 'Configuration cached successfully.', 'dim'],
+    ['$ ', 'certbot --nginx -d namamu.codeq.web.id', ''],
+    ['', 'HTTPS aktif', 'ok'],
+    ['', 'Live: https://namamu.codeq.web.id', 'ok']
+  ];
+
+  function add(prefix, text, cls) {
+    var d = document.createElement('div');
+    d.className = 'ln ' + (cls || '');
+    if (prefix) { var p = document.createElement('span'); p.className = 'hl'; p.textContent = prefix; d.appendChild(p); }
+    d.appendChild(document.createTextNode(text));
+    el.appendChild(d);
+    return d;
+  }
+
+  var cur = document.createElement('span');
+  cur.className = 'cursor';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    lines.forEach(function (l) { add(l[0], l[1], l[2]); });
+    el.appendChild(cur);
+    return;
+  }
+
+  var i = 0;
+  function next() {
+    if (cur.parentNode) cur.parentNode.removeChild(cur);
+    if (i >= lines.length) { el.lastChild.appendChild(cur); return; }
+    var l = lines[i++];
+    var row = add(l[0], '', l[2]);
+    var txt = row.appendChild(document.createTextNode(''));
+    row.appendChild(cur);
+    if (l[0]) {
+      var n = 0;
+      (function type() {
+        txt.nodeValue = l[1].slice(0, ++n);
+        if (n < l[1].length) setTimeout(type, 28);
+        else setTimeout(next, 280);
+      })();
+    } else {
+      txt.nodeValue = l[1];
+      setTimeout(next, 260);
+    }
+  }
+  next();
+})();
+</script>
+</body>
+</html>
